@@ -1,0 +1,89 @@
+
+#include<iostream>
+#include<conio.h>
+#include<stdlib.h>
+
+using namespace std;
+struct Nodo{
+	char dato;
+	Nodo *siguiente;	
+};
+//FUNCIONES DECLARADAS
+void agregar_P(Nodo *&,char);
+void sacar_P(Nodo *&,char &);
+
+//SE MANDA A LLAMAR EL MENU CON SU RESPECTIVAS ACCIONES
+void menuPila () {
+	
+//DECLARAMOS VARIABLES
+	int opc;
+	Nodo *pila = NULL;
+	int opcion;
+	char dato;
+				start:
+	 			system("cls");
+do{
+			cout << "\n\n\t\t\tMENU PILA" << endl;
+			cout << "\t\t\t--------------" << endl;
+			cout<< "1. INGRESA UN CARACTER A LA PILA" << endl;
+			cout<< "2. MOSTRAR PILA"<<endl;
+			cout<< "3. SUBMENU PILA"<<endl;
+			cout<< "INGRES SU OPCION: ";
+			cin>>opcion;
+				switch(opcion){
+		case 1: cout<<"\nINGRESE UN CARACTER ";
+					cin>>dato;
+						agregar_P(pila,dato);
+				break;
+				
+		case 2: cout<<"\nMOSTRANDO HISTORIAL DE LA PILA ";
+ 				while(pila != NULL){
+ 					sacar_P(pila,dato);
+ 				if(pila != NULL){
+					cout<<dato<<" , ";
+ 				} else{
+					cout<<dato<<".";
+ 				}
+ 			}
+ 				cout<<"\n";
+ 				system("pause");	
+	 			break;
+	 			
+	 			case 3: 
+ 					break;
+	 			}
+	 			system("cls"); 
+	 	} while (opcion != 3);
+	 	
+//SUBMENU PILA
+   	cout << "\n\n\t\t\tSubMenu PILA" << endl;
+    cout << "\t\t\t--------------" << endl;
+	cout<<"\n\t1.- VOLVER A INICIAR LA PILA "<<endl;
+	cout<<"\n\t0.- MENU PRINCIPAL"<<endl;
+	cout << "____________________________________________________" << endl;
+	cout<<"\n\tINGRESE LA OPCION NECESARIA: "; cin>>opc;
+	switch(opc){
+ 	case 1:
+		goto start;
+			break;
+			
+ 	case 0:
+ 		int main();
+			break;	   	
+	default:
+		cout<<"Ingrese un numero Valido..."<<endl;
+	}
+ 	}
+//ACCIONES DE LA PILA
+		void agregar_P(Nodo *&pila,char n){
+			Nodo *nuevo_nodo = new Nodo();
+			nuevo_nodo->dato = n;
+			nuevo_nodo->siguiente = pila;
+			pila = nuevo_nodo;
+	}
+		void sacar_P(Nodo *&pila,char &n){
+			Nodo *aux = pila;
+			n = aux->dato;
+			pila = aux->siguiente;
+			delete aux;
+	}
